@@ -1,4 +1,4 @@
-# VBase 1.1.1
+# VBase 1.1.2
 Very cool base to nodejs web projects. Inspired by great work from great people.
 
 ![VBase Logo](http://192.168.0.204/maxwlang/vbase/raw/ebc142e9e85ba248eb0318286eecea28dee7edee/src/img/logo.png?inline=false)
@@ -21,9 +21,7 @@ Very cool base to nodejs web projects. Inspired by great work from great people.
 - Optional per-page separated CSS to prevent clashing.
 
 ## Changes from previous version
-- \+ Optional per-page separated CSS to prevent clashing.
-- \+ Config helper has been changed to an express local, essentially making it global by default.
-- \+ Passport user is now passed through express local as well.
+- \+ Error handling
 
 ## Current Releases
 1. VBase Zen (from 1.0.0)
