@@ -22,8 +22,10 @@
                 <li>Switching between Bootstrap 3 and Bootstrap 4 with a single config change.</li>
                 <li>Automatic image compression and optomization.</li>
                 <li>Webpack for easy javascript resource inclusion and management.</li>
+                <li>Babel for older browser support, use ES6 with ease!</li>
                 <li>SNYK Support for known vulnerability testing.</li>
-                <li>Server livereload in development for faster development.</li>
+                <li>Server and client livereload in development for faster code writing.</li>
+                <li>Error handling.</li>
             </ul>
             <p>Links:</p>
             <ul>
@@ -36,13 +38,15 @@
                 <ul>
                     <li><a href="/api/hello">/api/hello (GET)</a></li>
                 </ul>
-                <p>Accounts:</p>
-                <ul>
-                    <li><a href="/login">/login (GET, POST)</a></li>
-                    <li><a href="/register">/register (GET, POST)</a></li>
-                    <li><a href="/logout">/logout (GET)</a></li>
-                    <li><a href="/hello/auth">/hello/auth (GET)</a></li>
-                </ul>
+                {{#if CONFIG.useDB}}
+                    <p>Accounts:</p>
+                    <ul>
+                        <li><a href="/login">/login (GET, POST)</a></li>
+                        <li><a href="/register">/register (GET, POST)</a></li>
+                        <li><a href="/logout">/logout (GET)</a></li>
+                        <li><a href="/hello/auth">/hello/auth (GET)</a></li>
+                    </ul>
+                {{/if}}
             </ul>
             <p>Getting started:</p>
             <ol>
