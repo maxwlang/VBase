@@ -12,35 +12,49 @@ const prompt = require('gulp-prompt');
 const imagemin = require('gulp-imagemin');
 const webpack = require('webpack-stream');
 const changed = require('gulp-changed');
+const uglify = require('gulp-uglify');
+const livereload = require('gulp-livereload');
+const babel = require('gulp-babel');
 sass.compiler = require('node-sass');
+const server = gls('./index.js', {}, false);
 
-const server = gls.new('./index.js');
-
-gulp.task('sass', function () {
+gulp.task('sass', () => {
     return gulp.src('./src/scss/**/*.scss')
         .pipe(sass.sync().on('error', sass.logError))
         .pipe(minifyCSS())
-        .pipe(gulp.dest('./public/css'));
+        .pipe(gulp.dest('./public/css'))
+        .pipe(livereload());
 });
 
-gulp.task('javascript', function () {
+gulp.task('javascript', () => {
     return gulp.src('./src/js/**/*.js')
         .pipe(named())
         .pipe(webpack({
             config: require('./webpack.config.js'),
         }))
-        .pipe(gulp.dest('./public/js'));
+        .pipe(babel({
+            presets: ['@babel/env']
+        }))
+        .pipe(uglify())
+        .pipe(gulp.dest('./public/js'))
+        .pipe(livereload());
 });
 
-gulp.task('images', function () {
+gulp.task('images', () => {
     return gulp.src('./src/img/**/*.*')
         .pipe(imagemin())
-        .pipe(gulp.dest('./public/img'));
+        .pipe(gulp.dest('./public/img'))
+        .pipe(livereload());
 });
 
-gulp.task('publicfs', function () {
-    const logFile = function (es) {
-        return es.map(function (file, cb) {
+gulp.task('handlebars', () => {
+    return gulp.src('./viws/**/*.*')
+        .pipe(livereload());
+});
+
+gulp.task('publicfs', () => {
+    const logFile = es => {
+        return es.map((file, cb) => {
             console.log(`[PublicFS] src/.../${path.basename(file.path)} -> public/.../${path.basename(file.path)}`);
             return cb(null, file);
         });
@@ -57,19 +71,24 @@ gulp.task('publicfs', function () {
         .pipe(gulp.dest('./public'));
 });
 
-gulp.task('reload', function (callback) {
+gulp.task('reload', callback => {
     server.start.bind(server)();
     return callback();
 });
 
-gulp.task('server', function () {
+gulp.task('server', () => {
     return server.start();
 });
 
-gulp.task('watch', function (callback) {
+gulp.task('watch', callback => {
+    livereload.listen();
     gulp.watch('./src/scss/**/*.scss', gulp.series('sass'));
     gulp.watch('./src/js/**/*.js', gulp.series('javascript'));
     gulp.watch('./src/img/**/*.*', gulp.series('images'));
+    gulp.watch([
+        './views/**/*.hbs',
+        './views/**/*.handlebars',
+    ], gulp.series('handlebars'));
     gulp.watch([
         './src/**/*.*',
         './src/*.*',
@@ -85,7 +104,7 @@ gulp.task('watch', function (callback) {
     callback();
 });
 
-gulp.task('sql', function () {
+gulp.task('sql', () => {
     let configFile = fs.readFileSync('./sql/initDB.sql', 'utf8');
     const gulpVariables = (configFile.match(/%%\[(.+?)\]%%/g)[0]).slice(3, -3).toUpperCase().split(', ');
     const prompts = [];
@@ -100,7 +119,7 @@ gulp.task('sql', function () {
     return gulp.src('./sql/initDB.sql').pipe(prompt.confirm({
         message: 'You are about to initialize ./sql/initDB.sql. Continue?',
         default: false,
-    })).pipe(prompt.prompt(prompts, function (res) {
+    })).pipe(prompt.prompt(prompts, res => {
 
         console.log('Variables to be overwritten: ');
         Object.keys(res).forEach(key => {
@@ -119,8 +138,7 @@ gulp.task('sql', function () {
 });
 
 gulp.task('prepare', gulp.parallel('sass', 'javascript', 'images', 'publicfs')); // Prepare content
-
-gulp.task('default', function () {
+gulp.task('default', () => {
     new Promise(gulp.parallel('sass', 'javascript', 'images', 'publicfs')) // Prepare content first
         .then(gulp.series('watch', 'server')); // Then watch and start server
 });

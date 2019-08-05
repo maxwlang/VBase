@@ -25,5 +25,8 @@
     {{>footer}}
 
     <script type="text/javascript" src="/public/js/mainlayout.min.js"></script>
+    {{#unless config.site.isProduction}}
+    <script src="//localhost:35729/livereload.js"></script>
+    {{/unless}}
 </body>
 </html>

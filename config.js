@@ -43,6 +43,7 @@ config.accounts.mysqllocal.email.minLength = 5;
 
 /* * * * MySQL (! >= 8.0) || MariaDB Configuration * * * */
 config.sql = {};
+config.useDB = false;
 config.sql.host = 'localhost';
 config.sql.port = 3306;
 config.sql.user = 'VBase';
