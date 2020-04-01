@@ -9,5 +9,6 @@ module.exports = (app, config, passport) => {
     if (config.accounts.enabled && config.useDB) require('./pages/authed')(app, config, passport);
 
     // Error handling routes. Must stay at bottom.
+    if (config.sentry.enabled) app.use(config.sentry.Sentry.Handlers.errorHandler());
     require('./errors')(app, config);
 };

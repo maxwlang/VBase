@@ -1,5 +1,6 @@
 // -----------------------------------------------------------------------------
-// Hello
+// Bootstrap
 // -----------------------------------------------------------------------------
 
-#welcomeTitle { color: $brand-primary; }
+// Pull in from node modules.
+@import 'bootstrap/dist/css/bootstrap.min';

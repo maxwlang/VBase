@@ -1,5 +1,5 @@
-# VBase 1.2.1
-Very cool base to nodejs web projects. Inspired by great work from great people.
+# VBase 1.3
+Very cool base to NodeJS web projects. Inspired by great work from great people.
 
 ![VBase Logo](https://github.com/gotkrypto76/VBase/blob/master/src/img/vbase-logo-long.png?raw=true)
 
@@ -21,10 +21,18 @@ Very cool base to nodejs web projects. Inspired by great work from great people.
 - Optional per-page separated CSS to prevent clashing.
 - Error handling.
 - Support for older browsers with babel.
+- Databases are now optional.
+
 ## Changes from previous version
-- \+ Databases are now optional.
-- \+ Support for older browsers with babel.
-- \+ Working livereload :thinking:
+- ~ The `gulp prepare` command is now `gulp production`.
+- ~ The main program has been renamed from `index.js` to `app.js`.
+- \+ SCSS Linting is introduced via the Stylelint plugin and configuration.
+- \+ SCSS files can now be imported from the node_modules folder, reducing redundant files. NPM install your stylesheets.
+- \+ ESLint config has been moved into package.json.
+- \+ Jump EMCAVersion in ESLint to 8.
+- \+ Split config into multiple files.
+- \+ Migrate to the 7-1 SCSS layout.
+- \+ Sentry.io error handler support in both the frontend and backend.
 
 ## Current Releases
 1. VBase Zen (from 1.0.0)

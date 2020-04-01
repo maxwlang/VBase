@@ -8,7 +8,7 @@ const SqlStore = require('express-mysql-session')(session);
 const passport = require('passport');
 const flash = require('connect-flash');
 
-const config = require('../config.js');
+const config = require('../config');
 const handlebars = require('../helpers/handlebars')(exphbs, config);
 
 module.exports = {

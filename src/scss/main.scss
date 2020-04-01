@@ -1,5 +1,48 @@
-// Pick a version (3 or 4) in the bootconfig file.
-@import './bootstrap/_bootconfig';
-@import './_fixednavbarhelper';
-@import './passport/_index';
-@import './pages/_pageloadersass';
+// -----------------------------------------------------------------------------
+// Main.scss
+// This structure is based on the SCSS 7-1 pattern.
+// http://sass-guidelin.es/#the-7-1-pattern
+// -----------------------------------------------------------------------------
+
+// Abstracts
+@import 'abstracts/variables';
+// @import 'abstracts/functions';
+// @import 'abstracts/mixins';
+// @import 'abstracts/placeholders';
+
+// Vendors
+@import 'vendors/bootstrap4';
+@import 'vendors/fontawesome';
+@import 'vendors/sweetalert2';
+
+// Base styles
+// @import 'base/reset';
+// @import 'base/typography';
+
+// Utillities
+// @import 'utils/navhelper';
+
+// Layouts
+// @import 'layout/navigation';
+// @import 'layout/grid';
+// @import 'layout/header';
+// @import 'layout/footer';
+// @import 'layout/sidebar';
+// @import 'layout/forms';
+
+// Components
+// @import 'components/buttons';
+// @import 'components/carousel';
+// @import 'components/cover';
+// @import 'components/dropdown';
+
+// Regular pages
+@import 'pages/hello';
+@import 'pages/helloauth';
+
+// Passport pages
+@import 'pages/passport/mysqllocal/index';
+
+// Themes
+// @import 'themes/dark';
+// @import 'themes/admin';

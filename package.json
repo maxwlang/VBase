@@ -1,15 +1,16 @@
 {
   "name": "vbase",
-  "version": "1.2.1",
+  "version": "1.3",
   "description": "A good starting base for nodejs websites.",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node app.js",
     "test": "mocha test/index.js && snyk auth && snyk test"
   },
   "author": "Maxwell Lang",
   "license": "MIT",
   "dependencies": {
+    "@sentry/node": "^5.15.4",
     "bcrypt": "^4.0.1",
     "body-parser": "^1.18.3",
     "bootstrap": "^3.4.0",
@@ -21,12 +22,13 @@
     "mysql2": "^1.6.4",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
-    "sweetalert2": "^7.33.1",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
+    "@fortawesome/fontawesome-free": "^5.13.0",
+    "@sentry/browser": "^5.15.4",
     "babel-preset-minify": "^0.5.0",
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
@@ -51,9 +53,133 @@
     "node-sass": "^4.13.1",
     "optipng-bin": "^6.0.0",
     "snyk": "^1.121.1",
+    "stylelint": "^13.2.1",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-scss": "^3.16.0",
+    "sweetalert2": "^7.33.1",
     "terser-webpack-plugin": "^1.2.1",
     "vinyl-named": "^1.1.0",
     "webpack": "^4.42.0",
     "webpack-stream": "^5.2.1"
-  }
+  },
+  "eslintConfig": {
+    "extends": "airbnb-base",
+    "plugins": [
+      "import"
+    ],
+    "env": {
+      "es6": true,
+      "browser": true,
+      "node": true,
+      "jquery": true
+    },
+    "globals": {
+      "$": true,
+      "jQuery": true
+    },
+    "parserOptions": {
+      "ecmaVersion": 8
+    },
+    "rules": {
+      "arrow-body-style": [
+        "error",
+        "as-needed"
+      ],
+      "arrow-parens": [
+        "warn",
+        "as-needed"
+      ],
+      "comma-dangle": [
+        "warn",
+        {
+          "arrays": "always-multiline",
+          "objects": "always",
+          "imports": "never",
+          "exports": "never",
+          "functions": "ignore"
+        }
+      ],
+      "consistent-return": 0,
+      "func-names": 0,
+      "global-require": 0,
+      "guard-for-in": 0,
+      "import/extensions": 0,
+      "import/no-extraneous-dependencies": [
+        "error",
+        {
+          "devDependencies": true
+        }
+      ],
+      "import/no-unresolved": [
+        "error",
+        {
+          "ignore": [
+            "^bootstrap"
+          ]
+        }
+      ],
+      "indent": [
+        "error",
+        4,
+        {
+          "SwitchCase": 1
+        }
+      ],
+      "linebreak-style": 0,
+      "max-len": 0,
+      "no-bitwise": 0,
+      "no-console": 0,
+      "no-continue": 0,
+      "no-extra-boolean-cast": 0,
+      "no-labels": 0,
+      "no-mixed-operators": 0,
+      "no-multiple-empty-lines": [
+        "warn",
+        {
+          "max": 2,
+          "maxEOF": 1
+        }
+      ],
+      "no-param-reassign": 0,
+      "no-plusplus": 0,
+      "no-prototype-builtins": 0,
+      "no-restricted-properties": 0,
+      "no-restricted-syntax": 0,
+      "no-shadow": 0,
+      "no-underscore-dangle": 0,
+      "no-unused-vars": [
+        "warn",
+        {
+          "args": "none"
+        }
+      ],
+      "no-use-before-define": 0,
+      "no-useless-escape": 0,
+      "object-shorthand": 0,
+      "padded-blocks": [
+        "error",
+        {
+          "switches": "never"
+        }
+      ],
+      "prefer-arrow-callback": 0,
+      "prefer-const": [
+        "warn"
+      ],
+      "prefer-template": 0,
+      "radix": [
+        "error",
+        "as-needed"
+      ],
+      "strict": [
+        0,
+        "global"
+      ]
+    }
+  },
+  "eslintIgnore": [
+    "dist/**/*.js",
+    "public/**/*.js",
+    "src/js/_plugins/**/*.js"
+  ]
 }

@@ -1,5 +1,6 @@
 // -----------------------------------------------------------------------------
-// Hello
+// SweetAlert2
 // -----------------------------------------------------------------------------
 
-#welcomeTitle { color: $brand-primary; }
+// Pull in from node_modules.
+@import 'sweetalert2/dist/sweetalert2.min';

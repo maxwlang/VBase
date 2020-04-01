@@ -15,11 +15,15 @@ const changed = require('gulp-changed');
 const livereload = require('gulp-livereload');
 const babel = require('gulp-babel');
 sass.compiler = require('node-sass');
-const server = gls('./index.js', {}, false);
+const server = gls('./app.js', {}, false);
 
 gulp.task('sass', () => {
     return gulp.src('./src/scss/**/*.scss')
-        .pipe(sass.sync().on('error', sass.logError))
+        .pipe(sass.sync({
+            includePaths: [
+                'node_modules/',
+            ],
+        }).on('error', sass.logError))
         .pipe(minifyCSS())
         .pipe(gulp.dest('./public/css'))
         .pipe(livereload());
@@ -89,7 +93,7 @@ gulp.task('watch', callback => {
     gulp.watch([
         './views/**/*.hbs',
         './views/**/*.handlebars',
-    ], gulp.series('handlebars'));
+    ], gulp.series('handlebars', 'reload'));
     gulp.watch([
         './src/**/*.*',
         './src/*.*',
@@ -138,7 +142,7 @@ gulp.task('sql', () => {
     }));
 });
 
-gulp.task('prepare', gulp.parallel('sass', 'javascript', 'images', 'publicfs')); // Prepare content
+gulp.task('production', gulp.parallel('sass', 'javascript', 'images', 'publicfs')); // Generate static production content
 gulp.task('default', () => {
     new Promise(gulp.parallel('sass', 'javascript', 'images', 'publicfs')) // Prepare content first
         .then(gulp.series('watch', 'server')); // Then watch and start server

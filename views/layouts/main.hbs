@@ -3,14 +3,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="{{CONFIG.site.description}}">
+    <meta name="description" content="{{config.site.description}}">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="{{CONFIG.site.name}}">
-    <meta property="og:description" content="{{CONFIG.site.description}}">
+    <meta property="og:title" content="{{config.site.name}}">
+    <meta property="og:description" content="{{config.site.description}}">
     <meta property="og:image" content="/public/img/logo.png">
-    <meta name="msapplication-TileColor" content="{{CONFIG.site.color}}">
-    <meta name="theme-color" content="{{CONFIG.site.color}}">
-    <title>{{CONFIG.site.name}} | {{subTitle}}</title>
+    <meta name="msapplication-TileColor" content="{{config.site.color}}">
+    <meta name="theme-color" content="{{config.site.color}}">
+    <title>{{config.site.name}} | {{subTitle}}</title>
     <link rel="stylesheet" type="text/css" href="/public/css/main.css">
     {{#if css}}
         <link rel="stylesheet" type="text/css" href="/public/css/{{css}}.css">
@@ -18,6 +18,8 @@
     <link rel="shortcut icon" type="image/png" href="/public/img/favicon.png"/>
 </head>
 <body>
+    <script type="text/javascript" src="/public/js/sentry.min.js"></script>
+
     {{>navbar}}
 
     {{{body}}}
@@ -28,5 +30,6 @@
     {{#unless config.site.isProduction}}
     <script src="//localhost:35729/livereload.js"></script>
     {{/unless}}
+
 </body>
 </html>
