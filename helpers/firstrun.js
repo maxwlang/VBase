@@ -1,7 +1,7 @@
 const fs = require('fs');
 const uuidv4 = require('uuid/v4');
 
-module.exports = function () {
+module.exports = () => {
     let configFile = fs.readFileSync('./config/session.js', 'utf8');
 
     // Swap instances of '%VBASE_UNIQUE%' in config.js with GUIDs.

@@ -12,7 +12,7 @@ const config = require('../config');
 const handlebars = require('../helpers/handlebars')(exphbs, config);
 
 module.exports = {
-    withPassport: function () {
+    withPassport: () => {
         const app = express();
         const sessionStore = new SqlStore(config.sql);
 
@@ -36,7 +36,7 @@ module.exports = {
         if (config.accounts.enabled) require('../authentication').init(app, config, passport);
         require('../routes')(app, config, passport);
 
-        app.get('/endTests', function (req, res) {
+        app.get('/endTests', (req, res) => {
             res.send('Closing..');
             console.log('Closing..');
             process.exit(0);
@@ -44,7 +44,7 @@ module.exports = {
 
         app.listen(3000);
     },
-    withoutPassport: function () {
+    withoutPassport: () => {
         const app = express();
         const sessionStore = new SqlStore(config.sql);
 
@@ -70,7 +70,7 @@ module.exports = {
         if (config.accounts.enabled) require('../authentication').init(app, config, passport);
         require('../routes')(app, config, passport);
 
-        app.get('/endTests', function (req, res) {
+        app.get('/endTests', (req, res) => {
             res.send('Closing..');
             console.log('Closing..');
             process.exit(0);

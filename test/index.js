@@ -13,32 +13,32 @@ const appURL = 'http://localhost';
 require('./app').withPassport();
 require('./app').withoutPassport();
 
-describe('Test VBase', function () {
+describe('Test VBase', () => {
 
-    describe('Test routes', function () {
-        describe('Pages', function () {
-            it('"/" should redirect to "/hello".', function (done) {
+    describe('Test routes', () => {
+        describe('Pages', () => {
+            it('"/" should redirect to "/hello".', done => {
                 chai.request(`${appURL}:3000`)
                     .get('/')
-                    .end(function (err, res) {
+                    .end((err, res) => {
                         expect(res.redirects).to.contain(`${appURL}:3000/hello`);
                         done();
                     });
             });
-            it('"/hello" should return status 200.', function (done) {
+            it('"/hello" should return status 200.', done => {
                 chai.request(`${appURL}:3000`)
                     .get('/hello')
-                    .end(function (err, res) {
+                    .end((err, res) => {
                         expect(res).to.have.status(200);
                         done();
                     });
             });
         });
-        describe('API', function () {
-            it('"/api/hello" should return json with success element.', function (done) {
+        describe('API', () => {
+            it('"/api/hello" should return json with success element.', done => {
                 chai.request(`${appURL}:3000`)
                     .get('/api/hello')
-                    .end(function (err, res) {
+                    .end((err, res) => {
                         expect(res).to.have.status(200);
                         expect(res.body.success).to.equal(true);
                         done();
@@ -46,113 +46,113 @@ describe('Test VBase', function () {
             });
         });
 
-        describe('Accounts when enabled', function () {
-            it('"/register" should return status 200.', function (done) {
+        describe('Accounts when enabled', () => {
+            it('"/register" should return status 200.', done => {
                 chai.request(`${appURL}:3000`)
                     .get('/register')
-                    .end(function (err, res) {
+                    .end((err, res) => {
                         expect(res).to.have.status(200);
                         done();
                     });
             });
-            it('"/login" should redirect to "/".', function (done) {
+            it('"/login" should redirect to "/".', done => {
                 chai.request(`${appURL}:3000`)
                     .get('/login')
-                    .end(function (err, res) {
+                    .end((err, res) => {
                         expect(res).to.have.status(200);
                         done();
                     });
             });
-            it('"/hello/auth" should return status 200.', function (done) {
+            it('"/hello/auth" should return status 200.', done => {
                 chai.request(`${appURL}:3000`)
                     .get('/hello/auth')
-                    .end(function (err, res) {
+                    .end((err, res) => {
                         expect(res).to.have.status(200);
                         done();
                     });
             });
-            it('"/logout" should redirect to "/" with destroyed user object.', function (done) {
+            it('"/logout" should redirect to "/" with destroyed user object.', done => {
                 chai.request(`${appURL}:3000`)
                     .get('/logout')
-                    .end(function (err, res) {
+                    .end((err, res) => {
                         expect(res).to.have.status(200);
                         done();
                     });
             });
-            it('"/hello/auth" should return status 403.', function (done) {
+            it('"/hello/auth" should return status 403.', done => {
                 chai.request(`${appURL}:3000`)
                     .get('/hello/auth')
-                    .end(function (err, res) {
+                    .end((err, res) => {
                         expect(res).to.have.status(200);
                         done();
                     });
             });
         });
 
-        describe('Accounts when disabled', function () {
-            it('"/register" should return status 404.', function (done) {
+        describe('Accounts when disabled', () => {
+            it('"/register" should return status 404.', done => {
                 chai.request(`${appURL}:3001`)
                     .get('/register')
-                    .end(function (err, res) {
+                    .end((err, res) => {
                         expect(res).to.have.status(404);
                         done();
                     });
             });
-            it('"/login" should return status 404.', function (done) {
+            it('"/login" should return status 404.', done => {
                 chai.request(`${appURL}:3001`)
                     .get('/login')
-                    .end(function (err, res) {
+                    .end((err, res) => {
                         expect(res).to.have.status(404);
                         done();
                     });
             });
-            it('"/hello/auth" should return status 404.', function (done) {
+            it('"/hello/auth" should return status 404.', done => {
                 chai.request(`${appURL}:3001`)
                     .get('/hello/auth')
-                    .end(function (err, res) {
+                    .end((err, res) => {
                         expect(res).to.have.status(404);
                         done();
                     });
             });
-            it('"/logout" should return status 404.', function (done) {
+            it('"/logout" should return status 404.', done => {
                 chai.request(`${appURL}:3001`)
                     .get('/logout')
-                    .end(function (err, res) {
+                    .end((err, res) => {
                         expect(res).to.have.status(404);
                         done();
                     });
             });
         });
 
-        describe('Errors', function () {
-            it('"/fakeRoute" should redirect to 404 handler.', function (done) {
+        describe('Errors', () => {
+            it('"/fakeRoute" should redirect to 404 handler.', done => {
                 chai.request(`${appURL}:3000`)
                     .get('/fakeRoute')
-                    .end(function (err, res) {
+                    .end((err, res) => {
                         expect(res).to.have.status(404);
                         done();
                     });
             });
-            it('"/fakeRoute/500" should redirect to 500 handler.', function (done) {
+            it('"/fakeRoute/500" should redirect to 500 handler.', done => {
                 chai.request(`${appURL}:3000`)
                     .get('/fakeRoute/500')
-                    .end(function (err, res) {
+                    .end((err, res) => {
                         expect(res).to.have.status(404);
                         done();
                     });
             });
-            it('"/public/fakeFile.png" should redirect to 404 handler.', function (done) {
+            it('"/public/fakeFile.png" should redirect to 404 handler.', done => {
                 chai.request(`${appURL}:3000`)
                     .get('/public/fakeFile.png')
-                    .end(function (err, res) {
+                    .end((err, res) => {
                         expect(res).to.have.status(404);
                         done();
                     });
             });
-            it('End test', function (done) {
+            it('End test', done => {
                 chai.request(`${appURL}:3000`)
                     .get('/endTests')
-                    .end(function (err, res) {
+                    .end((err, res) => {
                         done();
                     });
             });

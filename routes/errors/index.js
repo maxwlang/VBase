@@ -2,9 +2,10 @@
 
 module.exports = (app, config) => {
 
-    app.use(function (req, res, next) {
+    app.use((req, res, next) => {
         res.status(404);
 
+        // Render html error pages when needed
         if (req.accepts('html')) {
             res.render('errors/404', {
                 subTitle: '404',
@@ -14,17 +15,20 @@ module.exports = (app, config) => {
             return;
         }
 
+        // Render json error pages when needed
         if (req.accepts('json')) {
             res.send({ error: 'Not found', });
             return;
         }
 
+        // Render text error pages otherwise
         res.type('txt').send('Not found');
     });
 
-    app.use(function (err, req, res, next) {
+    app.use((err, req, res, next) => {
         res.status(500);
 
+        // Render html error pages when needed
         if (req.accepts('html')) {
             res.render('errors/500', {
                 subTitle: '500',
@@ -34,11 +38,13 @@ module.exports = (app, config) => {
             return;
         }
 
+        // Render json error pages when needed
         if (req.accepts('json')) {
             res.send({ error: 'Server Error', });
             return;
         }
 
+        // Render text error pages otherwise
         res.type('txt').send('Server Error');
     });
 };

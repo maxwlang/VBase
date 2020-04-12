@@ -1,4 +1,4 @@
-# VBase 2.0.0
+# VBase 2.0.1
 Very cool base to NodeJS web projects. Inspired by great work from great people.
 
 ![VBase Logo](https://github.com/gotkrypto76/VBase/blob/master/src/img/vbase-logo-long.png?raw=true)
@@ -22,11 +22,7 @@ Very cool base to NodeJS web projects. Inspired by great work from great people.
 - Unit tests with Mocha&Chai.
 
 ## Changes from previous version
-- \+ Update hello page.
-- \+ Shorten .handlebars extensions to .hbs.
-- \+ Fix to incorrect package.json version.
-- \+ Clean up readme
-- \- Remove snyk.
+- \+ Shorten functions to arrow functions when possible
 
 ## Current Releases
 - VBase Union (from 2.0.0)

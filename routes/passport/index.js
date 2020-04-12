@@ -3,7 +3,7 @@ module.exports = (app, config, passport) => {
     require('./mysqllocal')(app, config, passport);
 
     // Logout should generally be the same for each route
-    app.get('/logout', function (req, res) {
+    app.get('/logout', (req, res) => {
         req.logout();
         res.redirect('/');
     });

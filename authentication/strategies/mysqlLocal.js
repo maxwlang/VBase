@@ -5,17 +5,16 @@ const bcrypt = require('bcrypt');
 const config = require('../../config');
 
 const bcryptSaltRounds = 10;
-
 const sqlConnection = mysql.createConnection(config.sql);
 
-passport.serializeUser(function (user, done) {
+passport.serializeUser((user, done) => {
     done(null, user.id);
 });
 
-passport.deserializeUser(function (id, done) {
+passport.deserializeUser((id, done) => {
     sqlConnection.execute('SELECT * FROM `accounts` WHERE `id` = ?', [
         id,
-    ], function (err, results) {
+    ], (err, results) => {
         done(err, results[0]);
     });
 });
@@ -23,12 +22,12 @@ passport.deserializeUser(function (id, done) {
 module.exports = {
     signupStrategy: {
         name: 'local-signup-mysql',
-        strategyBirther: function () {
+        strategyBirther: () => {
             return new LocalStrategy({
                 usernameField: 'email',
                 passwordField: 'password',
                 passReqToCallback: true,
-            }, function (req, email, password, done) {
+            }, (req, email, password, done) => {
                 const salt = bcrypt.genSaltSync(bcryptSaltRounds);
 
                 // Overwrite password variable with hashed password
@@ -51,13 +50,13 @@ module.exports = {
 
                 sqlConnection.execute('SELECT * FROM `accounts` WHERE `email` = ?', [
                     email.toLowerCase(),
-                ], function (err, results) {
+                ], (err, results) => {
                     if (err) return done(err);
                     if (results.length) return done(null, false, req.flash('An account with this email already exists.'));
 
                     sqlConnection.execute('SELECT * FROM `accounts` WHERE `username` = ?', [
                         req.body.username.toLowerCase(),
-                    ], function (err, results) {
+                    ], (err, results) => {
                         if (results.length) return done(null, false, req.flash('An account with this username already exists.'));
 
                         sqlConnection.execute('INSERT INTO `accounts` (username, email, password, firstname, lastname) VALUES (?, ?, ?, ?, ?);', [
@@ -66,12 +65,12 @@ module.exports = {
                             password,
                             req.body.firstname || '',
                             req.body.lastname || '',
-                        ], function (err) {
+                        ], (err) => {
                             if (err) return done(err);
 
                             sqlConnection.execute('SELECT * FROM `accounts` WHERE `email` = ?', [
                                 email.toLowerCase(),
-                            ], function (err, results) {
+                            ], (err, results) => {
                                 if (err) return done(err);
 
                                 results[0].password = null;
@@ -90,15 +89,15 @@ module.exports = {
     },
     loginStrategy: {
         name: 'local-login-mysql',
-        strategyBirther: function () {
+        strategyBirther: () => {
             return new LocalStrategy({
                 usernameField: 'email',
                 passwordField: 'password',
                 passReqToCallback: true,
-            }, function (req, email, password, done) {
+            }, (req, email, password, done) => {
                 sqlConnection.execute('SELECT * FROM `accounts` WHERE `email` = ?', [
                     email.toLowerCase(),
-                ], function (err, results) {
+                ], (err, results) => {
                     if (err) return done(err);
                     if (results.length === 0) return done(null, false, req.flash('Unable to authorize account. Double check the login fields.'));
 
@@ -114,8 +113,6 @@ module.exports = {
                     // email: results[0].email,
                     return done(null, JSON.parse(JSON.stringify(results[0])));
                 });
-
-
             });
         },
     },
