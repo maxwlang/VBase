@@ -29,5 +29,5 @@ Very cool base to NodeJS web projects. Inspired by great work from great people.
 - \- Remove snyk.
 
 ## Current Releases
-2. VBase Union (from 2.0.0)
-1. VBase Zen (from 1.0.0)
+- VBase Union (from 2.0.0)
+- VBase Zen (from 1.0.0)
