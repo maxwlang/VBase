@@ -1,9 +1,0 @@
-# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.13.3
-# ignores vulnerabilities until expiry date; change duration by modifying expiry date
-ignore:
-  SNYK-JS-CHOWNR-73502:
-    - bcrypt > node-pre-gyp > tar > chownr:
-        reason: 'Required for specific version of bcrypt, not called in native code.'
-        expires: '2030-02-12T02:59:14.919Z'
-patch: {}

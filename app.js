@@ -27,8 +27,8 @@ if (config.useDB) sessionStore = new SqlStore(config.sql);
 
 // Setup the application
 if (config.sentry.enabled) app.use(Sentry.Handlers.requestHandler());
-app.engine('handlebars', handlebars.engine);
-app.set('view engine', 'handlebars');
+app.engine('hbs', handlebars.engine);
+app.set('view engine', 'hbs');
 if (config.accounts.enabled) app.use(flash());
 app.use('/public', express.static('public'));
 app.use(bodyParser.json());
