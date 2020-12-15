@@ -9,6 +9,7 @@ module.exports = {
     output: {
         filename: '[name].min.js',
     },
+    devtool: 'source-map',
     optimization: {
         minimizer: [new TerserPlugin()],
     },
@@ -20,4 +21,26 @@ module.exports = {
             swal: 'swal',
         }),
     ],
+    module: {
+        rules: [
+            {
+                test: /\.js.map$/,
+                loader: 'ignore-loader',
+                enforce: 'pre',
+            },
+            {
+                test: /\.m?js$/,
+                exclude: /(node_modules|bower_components)/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: [
+                            '@babel/preset-env',
+                            'minify',
+                        ]
+                    },
+                },
+            },
+        ],
+    }
 };

@@ -13,7 +13,6 @@ const imagemin = require('gulp-imagemin');
 const webpack = require('webpack-stream');
 const changed = require('gulp-changed');
 const livereload = require('gulp-livereload');
-const babel = require('gulp-babel');
 sass.compiler = require('node-sass');
 const server = gls('./app.js', {}, false);
 
@@ -34,12 +33,6 @@ gulp.task('javascript', () => {
         .pipe(named())
         .pipe(webpack({
             config: require('./webpack.config.js'),
-        }))
-        .pipe(babel({
-            presets: [
-                '@babel/env', 
-                'minify'
-            ]
         }))
         .pipe(gulp.dest('./public/js'))
         .pipe(livereload());
