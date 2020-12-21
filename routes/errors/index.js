@@ -10,7 +10,7 @@ module.exports = (app, config) => {
             res.render('errors/404', {
                 subTitle: '404',
                 url: req.url,
-                css: '../errors/404',
+                css: 'pages/errors/404',
             });
             return;
         }
@@ -33,7 +33,7 @@ module.exports = (app, config) => {
             res.render('errors/500', {
                 subTitle: '500',
                 error: err,
-                css: '../errors/500',
+                css: 'pages/errors/500',
             });
             return;
         }

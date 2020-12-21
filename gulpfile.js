@@ -13,6 +13,7 @@ const imagemin = require('gulp-imagemin');
 const webpack = require('webpack-stream');
 const changed = require('gulp-changed');
 const livereload = require('gulp-livereload');
+const autoprefixer = require('gulp-autoprefixer');
 sass.compiler = require('node-sass');
 const server = gls('./app.js', {}, false);
 
@@ -23,6 +24,9 @@ gulp.task('sass', () => {
                 'node_modules/',
             ],
         }).on('error', sass.logError))
+        .pipe(autoprefixer({
+            cascade: false,
+        }))
         .pipe(minifyCSS())
         .pipe(gulp.dest('./public/css'))
         .pipe(livereload());
@@ -46,7 +50,7 @@ gulp.task('images', () => {
 });
 
 gulp.task('handlebars', () => {
-    return gulp.src('./viws/**/*.*')
+    return gulp.src('./views/**/*.*')
         .pipe(livereload());
 });
 
