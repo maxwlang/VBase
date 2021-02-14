@@ -1,4 +1,4 @@
-# VBase 2.1.0
+# VBase 2.2.0
 Very cool base to NodeJS web projects. Inspired by great work from great people.
 
 ![VBase Logo](https://github.com/gotkrypto76/VBase/blob/master/src/img/vbase-logo-long.png?raw=true)
@@ -22,13 +22,13 @@ Very cool base to NodeJS web projects. Inspired by great work from great people.
 - ESLint config locate in package.json.
 - Unit tests with Mocha&Chai.
 - JS Sourcemaps.
+- Development and production webpack
 
 ## Changes from previous version
-- \+ Fix handlebars reloading
-- \+ Fix handlebars config variables
-- \+ Fix error page stylesheets
-- \+ Update error page stylesheets to use flexbox
-- \+ Add CSS AutoPrefixer
+- \+ Development and production webpack
+- \+ PM2 environment file
+- \+ Support for PORT env variable
+
 
 
 

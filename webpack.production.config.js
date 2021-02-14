@@ -1,10 +1,10 @@
 const webpack = require('webpack');
 const TerserPlugin = require('terser-webpack-plugin');
 
-console.log(`Webpack in development state.`);
+console.log(`Webpack in production state.`);
 
 module.exports = {
-    mode: 'development',
+    mode: 'production',
     output: {
         filename: '[name].min.js',
     },

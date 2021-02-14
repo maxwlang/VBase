@@ -27,9 +27,22 @@ gulp.task('sass', () => {
         .pipe(autoprefixer({
             cascade: false,
         }))
-        .pipe(minifyCSS())
         .pipe(gulp.dest('./public/css'))
         .pipe(livereload());
+});
+
+gulp.task('sass-production', () => {
+    return gulp.src('./src/scss/**/*.scss')
+        .pipe(sass.sync({
+            includePaths: [
+                'node_modules/',
+            ],
+        }).on('error', sass.logError))
+        .pipe(autoprefixer({
+            cascade: false,
+        }))
+        .pipe(minifyCSS())
+        .pipe(gulp.dest('./public/css'))
 });
 
 gulp.task('javascript', () => {
@@ -40,6 +53,15 @@ gulp.task('javascript', () => {
         }))
         .pipe(gulp.dest('./public/js'))
         .pipe(livereload());
+});
+
+gulp.task('javascript-production', () => {
+    return gulp.src('./src/js/**/*.js')
+        .pipe(named())
+        .pipe(webpack({
+            config: require('./webpack.production.config.js'),
+        }))
+        .pipe(gulp.dest('./public/js'));
 });
 
 gulp.task('images', () => {
@@ -139,7 +161,7 @@ gulp.task('sql', () => {
     }));
 });
 
-gulp.task('production', gulp.parallel('sass', 'javascript', 'images', 'publicfs')); // Generate static production content
+gulp.task('production', gulp.parallel('sass-production', 'javascript-production', 'images', 'publicfs')); // Generate static production content
 gulp.task('default', () => {
     new Promise(gulp.parallel('sass', 'javascript', 'images', 'publicfs')) // Prepare content first
         .then(gulp.series('watch', 'server')); // Then watch and start server
